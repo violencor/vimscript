@@ -47,13 +47,11 @@ function! s:AutoCreateHppHead(fileName)
     call add(fileHead, "#ifndef " . rFileName)
     call add(fileHead, "#define " . rFileName)
     call add(fileHead, "\/*")
-    call add(fileHead, " * ================================================================================")
-    call add(fileHead, " *")
-    call add(fileHead, " *  FileName: " . expand("%:t"))
+    call add(fileHead, " * ============================================================================")
     call add(fileHead, " *")
     call add(fileHead, " *  Description:")
     call add(fileHead, " *")
-    call add(fileHead, " * ================================================================================")
+    call add(fileHead, " * ============================================================================")
     call add(fileHead, " *\/")
     call add(fileHead, "#endif // " . rFileName)
     call writefile(fileHead, a:fileName)
@@ -89,3 +87,17 @@ endif
 
 " Abbreviations
 " iabbrev { {<CR>}
+
+" colorcolumn switch
+function! s:SwitchColorColumn()
+    if g:colorColumnOn == 1
+        set colorcolumn=0
+        let g:colorColumnOn = 0
+    else
+        set colorcolumn=+1
+        let g:colorColumnOn = 1
+    endif
+endfunction
+
+let g:colorColumnOn = 0
+nnoremap <F2> :call <SID>SwitchColorColumn()<CR>

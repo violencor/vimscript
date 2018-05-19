@@ -21,6 +21,8 @@ set wildmenu
 set wildmode=longest,list
 set nostartofline
 set notimeout ttimeout ttimeoutlen=200
+set textwidth=79
+highlight ColorColumn ctermbg=DarkGray guibg=lightgrey
 
 " stateline
 function! GitBranch()
