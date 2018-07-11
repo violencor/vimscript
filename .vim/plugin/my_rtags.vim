@@ -18,7 +18,7 @@ endfunction
 " execute system cmd and format rc ret into quickfix-list
 function! s:ExecuteCmdAndFormat2Qf(cmd, projectRoot)
     let rcRet = systemlist(a:cmd)
-    " echo rcRet
+    " echom string(rcRet)
 
     " format rc ret into quickfix-list
     let list = []
@@ -35,7 +35,12 @@ function! s:ExecuteCmdAndFormat2Qf(cmd, projectRoot)
                 call s:Elog("find symbol : " . symbol)
                 continue
             endif
-            let pathName = a:projectRoot . '/' . matches[1]
+            " rtags可能返回绝对路径,也可能返回相对路径
+            if matches[1][0] == '/' || matches[1][0] == '~'
+                let pathName = matches[1]
+            else
+                let pathName = a:projectRoot . '/' . matches[1]
+            endif
             let lineNum = matches[2]
             let colNum = matches[3]
             let lineText = matches[4]
@@ -66,7 +71,7 @@ function! s:FindDefine(location)
     " execute rtags rc command
     let projectRoot = <SID>FindProjectRoot()
     let socketFile = <SID>FindRdmSocketFile(projectRoot)
-    let cmd = "rc -b --verify-version=121 --all-targets --socket-file=" . socketFile . " -f " . a:location
+    let cmd = "rc -b --all-targets --socket-file=" . socketFile . " -f " . a:location
 
     call s:ExecuteCmdAndFormat2Qf(cmd, projectRoot)
 endfunction
@@ -76,7 +81,7 @@ function! s:FindReference(location)
     " execute rtags rc command
     let projectRoot = <SID>FindProjectRoot()
     let socketFile = <SID>FindRdmSocketFile(projectRoot)
-    let cmd = "rc -b --verify-version=121 --all-targets --socket-file=" . socketFile . " -r " . a:location
+    let cmd = "rc -b --all-targets --socket-file=" . socketFile . " -r " . a:location
 
     call s:ExecuteCmdAndFormat2Qf(cmd, projectRoot)
 endfunction

@@ -1,4 +1,16 @@
-let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+function! s:SetYcmdCnf()
+    let projectRoot = system("pj-root")
+    let projectRootLen = len(projectRoot) - 1
+    if projectRootLen < 0
+        let g:ycm_global_ycm_extra_conf='~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py'
+    else
+        let projectRoot = strpart(projectRoot, 0, projectRootLen)
+        let g:ycm_global_ycm_extra_conf= projectRoot . '/.ycm_extra_conf.py'
+    endif
+endfunction
+
+call <SID>SetYcmdCnf()
+" echom g:ycm_global_ycm_extra_conf
 nnoremap <leader>f :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let g:ycm_python_binary_path = '/usr/bin/python'
 " 语法关键字补全

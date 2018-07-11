@@ -21,7 +21,7 @@ command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
 ca shell Shell
 
 nnoremap <leader>e :execute "Grep -rnIw " . expand("<cword>") . " . --exclude-dir=build" <Bar> cw<CR>:copen<CR>
-nnoremap <leader>w :execute "grep -rnIw " . expand("<cword>") . " . --exclude-dir={build,p4,export,home,.rtags,.git}" <CR>:copen<CR>
+nnoremap <leader>w :execute "grep -rnIw " . expand("<cword>") . " . --exclude-dir={build,p4,export,home,.rtags,.git,autogen}" <CR>:copen<CR>
 
 " autocmd BufNewFile hpp, do pre_write
 " write #pragma once & define into hpp file
@@ -49,7 +49,6 @@ function! s:AutoCreateHppHead(fileName)
     call add(fileHead, "\/*")
     call add(fileHead, " * ============================================================================")
     call add(fileHead, " *")
-    call add(fileHead, " *  Description:")
     call add(fileHead, " *")
     call add(fileHead, " * ============================================================================")
     call add(fileHead, " *\/")
@@ -94,7 +93,7 @@ function! s:SwitchColorColumn()
         set colorcolumn=0
         let g:colorColumnOn = 0
     else
-        set colorcolumn=+1
+        set colorcolumn=80
         let g:colorColumnOn = 1
     endif
 endfunction

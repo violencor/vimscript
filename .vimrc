@@ -21,7 +21,8 @@ set wildmenu
 set wildmode=longest,list
 set nostartofline
 set notimeout ttimeout ttimeoutlen=200
-set textwidth=79
+" set textwidth=79
+" set formatoptions-=t
 highlight ColorColumn ctermbg=DarkGray guibg=lightgrey
 
 " stateline
@@ -72,6 +73,9 @@ Plugin 'https://github.com/suan/vim-instant-markdown.git'
 " vim grep
 Plugin 'https://github.com/yegappan/grep.git'
 
+" vimwiki
+Plugin 'vimwiki/vimwiki', { 'branch': 'dev' }
+
 " " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -95,3 +99,5 @@ let mapleader = "\<Space>"
 set completeopt=longest,menu
 " 复制所在单词
 nnoremap <C-c> viwy
+" 新键盘的`键按起来不方便,把'映射成`
+nnoremap ' `
