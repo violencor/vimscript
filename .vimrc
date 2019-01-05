@@ -101,3 +101,11 @@ set completeopt=longest,menu
 nnoremap <C-c> viwy
 " 新键盘的`键按起来不方便,把'映射成`
 nnoremap ' `
+" 去除行尾空格
+nnoremap <leader>c :%s/  *$/<CR>
+nnoremap <leader>v :%s/\t$/<CR>
+" netrw配置
+" let g:netrw_browse_split = 2 " 从netrw打开的文件相当于vsp打开
+let g:netrw_winsize = 25 " netrw窗口的大小比例
+let g:netrw_banner = 0 " 头部描述不显示
+nnoremap <leader>x :Vex<CR>
